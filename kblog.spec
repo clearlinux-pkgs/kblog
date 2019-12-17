@@ -6,7 +6,7 @@
 #
 Name     : kblog
 Version  : 19.12.0
-Release  : 15
+Release  : 16
 URL      : https://download.kde.org/stable/release-service/19.12.0/src/kblog-19.12.0.tar.xz
 Source0  : https://download.kde.org/stable/release-service/19.12.0/src/kblog-19.12.0.tar.xz
 Source1  : https://download.kde.org/stable/release-service/19.12.0/src/kblog-19.12.0.tar.xz.sig
@@ -19,7 +19,7 @@ Requires: kblog-license = %{version}-%{release}
 Requires: kblog-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
-BuildRequires : kcalcore-dev
+BuildRequires : kcalendarcore-dev
 BuildRequires : kxmlrpcclient-dev
 BuildRequires : syndication-dev
 
@@ -41,7 +41,6 @@ Group: Development
 Requires: kblog-lib = %{version}-%{release}
 Requires: kblog-data = %{version}-%{release}
 Provides: kblog-devel = %{version}-%{release}
-Requires: kblog = %{version}-%{release}
 Requires: kblog = %{version}-%{release}
 
 %description dev
@@ -83,10 +82,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1576548172
+export SOURCE_DATE_EPOCH=1576621389
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -100,7 +98,7 @@ make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1576548172
+export SOURCE_DATE_EPOCH=1576621389
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kblog
 cp %{_builddir}/kblog-19.12.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kblog/9a1929f4700d2407c70b507b3b2aaf6226a9543c
