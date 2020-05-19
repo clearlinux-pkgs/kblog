@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xDBD2CE893E2D1C87 (cfeck@kde.org)
 #
 Name     : kblog
-Version  : 20.04.0
-Release  : 20
-URL      : https://download.kde.org/stable/release-service/20.04.0/src/kblog-20.04.0.tar.xz
-Source0  : https://download.kde.org/stable/release-service/20.04.0/src/kblog-20.04.0.tar.xz
-Source1  : https://download.kde.org/stable/release-service/20.04.0/src/kblog-20.04.0.tar.xz.sig
+Version  : 20.04.1
+Release  : 21
+URL      : https://download.kde.org/stable/release-service/20.04.1/src/kblog-20.04.1.tar.xz
+Source0  : https://download.kde.org/stable/release-service/20.04.1/src/kblog-20.04.1.tar.xz
+Source1  : https://download.kde.org/stable/release-service/20.04.1/src/kblog-20.04.1.tar.xz.sig
 Summary  : A blogging library for KDE
 Group    : Development/Tools
 License  : LGPL-2.1
@@ -19,8 +19,13 @@ Requires: kblog-license = %{version}-%{release}
 Requires: kblog-locales = %{version}-%{release}
 BuildRequires : buildreq-cmake
 BuildRequires : buildreq-kde
+BuildRequires : extra-cmake-modules-data
 BuildRequires : kcalendarcore-dev
+BuildRequires : kcoreaddons-dev
+BuildRequires : ki18n-dev
+BuildRequires : kio-dev
 BuildRequires : kxmlrpcclient-dev
+BuildRequires : qtbase-dev
 BuildRequires : syndication-dev
 
 %description
@@ -41,7 +46,6 @@ Group: Development
 Requires: kblog-lib = %{version}-%{release}
 Requires: kblog-data = %{version}-%{release}
 Provides: kblog-devel = %{version}-%{release}
-Requires: kblog = %{version}-%{release}
 Requires: kblog = %{version}-%{release}
 
 %description dev
@@ -75,35 +79,34 @@ locales components for the kblog package.
 
 
 %prep
-%setup -q -n kblog-20.04.0
-cd %{_builddir}/kblog-20.04.0
+%setup -q -n kblog-20.04.1
+cd %{_builddir}/kblog-20.04.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1587677143
+export SOURCE_DATE_EPOCH=1589849499
 mkdir -p clr-build
 pushd clr-build
-# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %cmake ..
 make  %{?_smp_mflags}  VERBOSE=1
 popd
 
 %install
-export SOURCE_DATE_EPOCH=1587677143
+export SOURCE_DATE_EPOCH=1589849499
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/kblog
-cp %{_builddir}/kblog-20.04.0/COPYING.LIB %{buildroot}/usr/share/package-licenses/kblog/9a1929f4700d2407c70b507b3b2aaf6226a9543c
+cp %{_builddir}/kblog-20.04.1/COPYING.LIB %{buildroot}/usr/share/package-licenses/kblog/9a1929f4700d2407c70b507b3b2aaf6226a9543c
 pushd clr-build
 %make_install
 popd
@@ -158,7 +161,7 @@ popd
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/libKF5Blog.so.5
-/usr/lib64/libKF5Blog.so.5.14.0
+/usr/lib64/libKF5Blog.so.5.14.1
 
 %files license
 %defattr(0644,root,root,0755)
